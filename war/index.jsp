@@ -26,10 +26,12 @@
 			});
 		});
 	</script>
-	<title>index</title>
+	<title>適地適作補助サービス</title>
 </head>
 <body>
-<h1>さんぷる</h1>
+<h1>適地適作補助サービス</h1>
+<p>適した農作物を表示したい都道府県をクリックしてください</p>
+<p>その都道府県の今年の気候の予想と，適した農作物を表示します</p>
 <div id="map-container"></div>
 </body>
 </html>
