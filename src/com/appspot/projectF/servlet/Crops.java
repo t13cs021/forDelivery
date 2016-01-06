@@ -52,7 +52,7 @@ public class Crops {
 	public void setName(String name) {
 		String[] strs = this.name.split(":");
 		strs[0] = name;
-		this.name = String.join(":", strs);
+		this.name = strs[0] + ":" + strs[1];
 	}
 
 	public int getMonth() {
@@ -62,7 +62,7 @@ public class Crops {
 	public void setMonth(int month) {
 		String[] strs = this.name.split(":");
 		strs[1] = String.valueOf(month);
-		this.name = String.join(":", strs);
+		this.name = strs[0] + ":" + strs[1];
 	}
 
 	public float getTemp_uLimit() {
