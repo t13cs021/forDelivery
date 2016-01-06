@@ -1,7 +1,5 @@
 package com.appspot.projectF.servlet;
 
-import java.util.Date;
-import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -11,40 +9,31 @@ import javax.jdo.annotations.PrimaryKey;
 public class Climate {
 
 	@PrimaryKey
-	//都道府県名
+	//都道府県名:年:月
 	@Persistent
 	private String prefectures;
-	
-	//年
-	@Persistent
-	private int year;
-	
-	//月
-	@Persistent
-	private int month;
-	
+
+
 	//気温
 	@Persistent
 	private float temperature;
-	
+
 	//降水量
 	@Persistent
 	private float precipitation;
-	
+
 	//降雪量
 	@Persistent
 	private float snowfall;
-	
+
 	//日照時間
 	@Persistent
 	private float sunhour;
-	
+
 	public Climate(String prefectures, int year, int month, float temperature,
 			float precipitation, float snowfall, float sunhour) {
 		super();
-		this.prefectures = prefectures;
-		this.year = year;
-		this.month = month;
+		this.prefectures = prefectures + ":" + year + ":"+ month;
 		this.temperature = temperature;
 		this.precipitation = precipitation;
 		this.snowfall = snowfall;
@@ -53,27 +42,33 @@ public class Climate {
 
 	// ゲッタとセッタ
 	public String getPrefectures() {
-		return prefectures;
+		return prefectures.split(":")[0];
 	}
 
 	public void setPrefectures(String prefectures) {
-		this.prefectures = prefectures;
+		String[] strs = this.prefectures.split(":");
+		strs[0] = prefectures;
+		this.prefectures = String.join(":", strs);
 	}
 
 	public int getYear() {
-		return year;
+		return Integer.getInteger(prefectures.split(":")[1]);
 	}
 
 	public void setYear(int year) {
-		this.year = year;
+		String[] strs = this.prefectures.split(":");
+		strs[1] = String.valueOf(year);
+		this.prefectures = String.join(":", strs);
 	}
 
 	public int getMonth() {
-		return month;
+		return Integer.getInteger(prefectures.split(":")[2]);
 	}
 
 	public void setMonth(int month) {
-		this.month = month;
+		String[] strs = this.prefectures.split(":");
+		strs[2] = String.valueOf(month);
+		this.prefectures = String.join(":", strs);
 	}
 
 	public float getTemperature() {
