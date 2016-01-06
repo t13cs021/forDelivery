@@ -44,9 +44,7 @@ public class AddVeg extends HttpServlet {
 		//Web\u30da\u30fc\u30b8\u3092\u4f5c\u308b
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf-8");
-        StringBuffer sb = new StringBuffer();
-        sb.append(html);
-        response.getWriter().print(sb.toString());
+       response.getWriter().print(html);
 	}
 
 }
