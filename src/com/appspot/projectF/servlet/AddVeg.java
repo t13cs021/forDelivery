@@ -1,7 +1,6 @@
 package com.appspot.projectF.servlet;
 
 import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -20,55 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AddVeg extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-	
-	private static final String head = 
-			"<html>\n"
-			+ "<body>\n"
-			+ " <span style=\"font-size: 200%\">農作物登録</span>\n"
-			+ " <p>農作物名,月,最低温度,最高温度,最短日照時間,最長日照時間,メモ</p>"
-			+ " <p>の形式で入力してください(従わないと大変なことになりますよ)</p>"
-			+ " <p>カンマは半角です</p>"
-			+ " <p>とりあえず簡易版なので，データにカンマを含めないでください(区切りだと勘違いします)</p>"
-			+ "  <form action=\"/AddVeg\" method=\"post\">\n"
-			+ "    <div>\n"
-			+ "      <textarea name=\"content\" rows=\"2\" cols=\"40\"></textarea>"
-			+ "    </div>\n"
-			+ "    <input type=\"submit\" value=\"Submit\" />\n"
-			+ "  </form>\n"; 
-	
-    // メモのテンプレート
-    // {1}が本文
-    private static final String cropsList = 
-          "  <div>\n"
-        + "    <pre>名前：{6}</pre> \n"
-        + "    <pre>月{5}</pre> \n"
-        + "    <pre>最低温度{4}</pre> \n"
-        + "    <pre>最高温度{3}</pre> \n"
-        + "    <pre>最短日照時間{2}</pre> \n"
-        + "    <pre>最長日照時間{1}</pre> \n"
-        + "    <pre>メモ：{0}</pre> \n"
-        + "  </div> \n";
-    
-    // ページの最後
-    private static final String tail = "  </body> \n" + "</html>\n";
-    
-    //Webページを作る
-    private String render(List<Crops> crops) {
-        StringBuffer sb = new StringBuffer();
-        sb.append(head);
-        for (Crops crop : crops)
-            sb.append(MessageFormat.format(cropsList, crop.getName(), crop.getMonth(),
-            		crop.getTemp_uLimit(), crop.getTemp_lLimit(), 
-                    crop.getSunhour_uLimit(), crop.getSunhour_lLimit(), crop.getMemo()));
-        sb.append(tail);
-        return sb.toString();
-    }
-	
-	
+
     public AddVeg() {
         super();
         // TODO Auto-generated constructor stub
@@ -77,11 +28,11 @@ public class AddVeg extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-    
-    
+
+
 	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
         PersistenceManager pm = null;
         //DB開けなかったら，開けてもデータストアを閉じる
         try {
@@ -90,18 +41,19 @@ public class AddVeg extends HttpServlet {
             //query.setOrdering("date desc");
 
             List<Crops> crops = (List<Crops>) query.execute();
-            //HTMLの出力
-            response.setContentType("text/html");
-            response.setCharacterEncoding("utf-8");
-            response.getWriter().print(render(crops));
+            request.setAttribute("crops", crops);
         } finally {
             if (pm != null && !pm.isClosed())
                 pm.close();
         }
+        request.getRequestDispatcher("/addVeg.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		//パラメータの文字コードを指定(しないと日本語が化ける)。
+		req.setCharacterEncoding("UTF-8");
+
 		//CSV形式のデータをパース
 		//パース直後に各値を保持する一時変数
 		String name,memo;
@@ -130,7 +82,7 @@ public class AddVeg extends HttpServlet {
 			//パースした各値を農作物オブジェクトにして，リストに追加
 			crops.add(new Crops(name, month, temp_uLimit, temp_lLimit, sunhour_uLimit, sunhour_lLimit, memo));
         }
-		
+
 		//データストアへ投入
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
@@ -139,7 +91,7 @@ public class AddVeg extends HttpServlet {
 		} finally {
 			pm.close();
 		}
-		resp.sendRedirect("/AddVeg");
+ 		resp.sendRedirect("/AddVeg");
 	}
 
 }
