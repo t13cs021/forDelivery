@@ -20,6 +20,9 @@ List<Crops> crops = (List<Crops>)request.getAttribute("crops");
     </div>
     <input type="submit" value="Submit" />
   </form>
+  <form action="/DelCrops" method="post">
+    <input type="submit" value="Submit" />
+  </form>
 
   <h3>確認用出力</h3>
   <table>

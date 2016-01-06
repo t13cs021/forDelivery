@@ -52,7 +52,7 @@ public class Climate {
 	}
 
 	public int getYear() {
-		return Integer.getInteger(prefectures.split(":")[1]);
+		return Integer.parseInt(prefectures.split(":")[1]);
 	}
 
 	public void setYear(int year) {
@@ -62,7 +62,7 @@ public class Climate {
 	}
 
 	public int getMonth() {
-		return Integer.getInteger(prefectures.split(":")[2]);
+		return Integer.parseInt(prefectures.split(":")[2]);
 	}
 
 	public void setMonth(int month) {

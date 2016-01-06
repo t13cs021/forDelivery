@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AddVeg extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public AddVeg() {
+	public AddVeg() {
         super();
         // TODO Auto-generated constructor stub
     }
