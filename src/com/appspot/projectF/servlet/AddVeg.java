@@ -28,6 +28,9 @@ public class AddVeg extends HttpServlet {
 			+ "    </div>\n"
 			+ "    <input type=\"submit\" value=\"Submit\" />\n"
 			+ "  </form>\n"
+			+ "  <form action=\"/DelCrops\" method=\"post\">\n"
+			+ "    <input type=\"submit\" value=\"Submit\" />\n"
+			+ "  </form>\n"
 			+ "</body>\n"
 			+"</html>\n"; 
 	
