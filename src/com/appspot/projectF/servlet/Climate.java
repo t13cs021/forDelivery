@@ -48,7 +48,7 @@ public class Climate {
 	public void setPrefectures(String prefectures) {
 		String[] strs = this.prefectures.split(":");
 		strs[0] = prefectures;
-		this.prefectures = String.join(":", strs);
+		this.prefectures = strs[0] + ":" + strs[1] + ":" + strs[2];
 	}
 
 	public int getYear() {
@@ -58,7 +58,7 @@ public class Climate {
 	public void setYear(int year) {
 		String[] strs = this.prefectures.split(":");
 		strs[1] = String.valueOf(year);
-		this.prefectures = String.join(":", strs);
+		this.prefectures = strs[0] + ":" + strs[1] + ":" + strs[2];
 	}
 
 	public int getMonth() {
@@ -68,7 +68,7 @@ public class Climate {
 	public void setMonth(int month) {
 		String[] strs = this.prefectures.split(":");
 		strs[2] = String.valueOf(month);
-		this.prefectures = String.join(":", strs);
+		this.prefectures = strs[0] + ":" + strs[1] + ":" + strs[2];
 	}
 
 	public float getTemperature() {
