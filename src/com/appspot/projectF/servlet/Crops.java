@@ -1,7 +1,5 @@
 package com.appspot.projectF.servlet;
 
-import java.util.Date;
-import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -9,41 +7,36 @@ import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Crops {
-	
+
 	@PrimaryKey
-	//農作物
+	//農作物:月
 	@Persistent
 	private String name;
-	
-	//日付
-	@Persistent
-	private int month;
-	
+
 	//気温上限
 	@Persistent
 	private float temp_uLimit;
-	
+
 	//気温下限
 	@Persistent
 	private float temp_lLimit;
-	
+
 	//日照時間上限
 	@Persistent
 	private float sunhour_uLimit;
-	
+
 	//日照時間下限
 	@Persistent
 	private float sunhour_lLimit;
-	
+
 	//メモ
 	@Persistent
 	private String memo;
-	
+
 	public Crops(String name, int month, float temp_uLimit, float temp_lLimit,
 			float sunhour_uLimit, float sunhour_lLimit, String memo) {
 		super();
-		this.name = name;
-		this.month = month;
+		this.name = name + ":" + month;
 		this.temp_uLimit = temp_uLimit;
 		this.temp_lLimit = temp_lLimit;
 		this.sunhour_uLimit = sunhour_uLimit;
@@ -53,19 +46,23 @@ public class Crops {
 
 	//ゲッタ, セッタ
 	public String getName() {
-		return name;
+		return name.split(":")[0];
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		String[] strs = this.name.split(":");
+		strs[0] = name;
+		this.name = String.join(":", strs);
 	}
 
 	public int getMonth() {
-		return month;
+		return Integer.getInteger(name.split(":")[1]);
 	}
 
 	public void setMonth(int month) {
-		this.month = month;
+		String[] strs = this.name.split(":");
+		strs[1] = String.valueOf(month);
+		this.name = String.join(":", strs);
 	}
 
 	public float getTemp_uLimit() {
@@ -107,6 +104,6 @@ public class Crops {
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
-	
-	
+
+
 }
