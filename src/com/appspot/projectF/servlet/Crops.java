@@ -56,7 +56,7 @@ public class Crops {
 	}
 
 	public int getMonth() {
-		return Integer.getInteger(name.split(":")[1]);
+		return Integer.parseInt(name.split(":")[1]);
 	}
 
 	public void setMonth(int month) {
