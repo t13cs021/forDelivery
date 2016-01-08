@@ -10,10 +10,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-class>com.appspot.projectF.servlet.RecommendServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>AddCrops</servlet-name>
-		<servlet-class>com.appspot.projectF.servlet.AddCrops</servlet-class>
-	</servlet>
-	<servlet>
 		<servlet-name>Detail</servlet-name>
 		<servlet-class>com.appspot.projectF.servlet.DetailServlet</servlet-class>
 	</servlet>
@@ -21,14 +17,18 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>Graph</servlet-name>
 		<servlet-class>com.appspot.projectF.servlet.GraphServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>AddCrops</servlet-name>
+		<servlet-class>com.appspot.projectF.servlet.AddCrops</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>DelCrops</servlet-name>
+		<servlet-class>com.appspot.projectF.servlet.DelCrops</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>Recommend</servlet-name>
 		<url-pattern>/recommend</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>AddCrops</servlet-name>
-		<url-pattern>/addcrops</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Detail</servlet-name>
@@ -37,6 +37,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet-mapping>
 		<servlet-name>Graph</servlet-name>
 		<url-pattern>/graph</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddCrops</servlet-name>
+		<url-pattern>/addcrops</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DelCrops</servlet-name>
+		<url-pattern>/delcrops</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>

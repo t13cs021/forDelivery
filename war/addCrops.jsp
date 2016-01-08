@@ -21,7 +21,7 @@ List<Crops> crops = (List<Crops>)request.getAttribute("crops");
     </div>
     <input type="submit" value="Submit" />
   </form>
-  <form action="/DelCrops" method="post">
+  <form action="/delcrops" method="post">
     <input type="submit" value="remove all" />
   </form>
 
