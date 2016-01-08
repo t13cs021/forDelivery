@@ -12,25 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
-/**
- * Servlet implementation class AddVeg
- */
-public class AddVeg extends HttpServlet {
+public class AddCrops extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public AddVeg() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-
-
-	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         PersistenceManager pm = null;
@@ -38,7 +22,6 @@ public class AddVeg extends HttpServlet {
         try {
             pm = PMF.get().getPersistenceManager();
             Query query = pm.newQuery(Crops.class);
-            //query.setOrdering("date desc");
 
             List<Crops> crops = (List<Crops>) query.execute();
             request.setAttribute("crops", crops);
@@ -46,7 +29,7 @@ public class AddVeg extends HttpServlet {
             if (pm != null && !pm.isClosed())
                 pm.close();
         }
-        request.getRequestDispatcher("/addVeg.jsp").forward(request, response);
+        request.getRequestDispatcher("/addCrops.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -86,12 +69,12 @@ public class AddVeg extends HttpServlet {
 		//データストアへ投入
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
-			//データストアにリストを書き込み(これでできるか不明)
+			//データストアにリストを書き込み
 			pm.makePersistentAll(crops);
 		} finally {
 			pm.close();
 		}
- 		resp.sendRedirect("/AddVeg");
+ 		resp.sendRedirect("/addcrops");
 	}
 
 }
