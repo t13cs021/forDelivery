@@ -26,6 +26,6 @@ public class DelCrops extends HttpServlet {
                 pm.close();
         }
 
-        resp.sendRedirect("/AddVeg");
-        }
+        resp.sendRedirect("/addcrops");
+    }
 }
