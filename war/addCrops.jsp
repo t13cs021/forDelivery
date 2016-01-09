@@ -37,6 +37,7 @@ List<Crops> crops = (List<Crops>)request.getAttribute("crops");
       <th>メモ</th>
     </tr>
     <% if (crops != null) for (Crops crop: crops) { %>
+    <tr>
       <td><%= crop.getName() %></td>
       <td><%= crop.getMonth() %></td>
       <td><%= crop.getTemp_lLimit() %></td>

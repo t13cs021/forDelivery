@@ -25,6 +25,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>DelCrops</servlet-name>
 		<servlet-class>com.appspot.projectF.servlet.DelCrops</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>AddClimate</servlet-name>
+		<servlet-class>com.appspot.projectF.servlet.AddClimate</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>DelClimate</servlet-name>
+		<servlet-class>com.appspot.projectF.servlet.DelClimate</servlet-class>
+	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>Recommend</servlet-name>
@@ -45,6 +53,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet-mapping>
 		<servlet-name>DelCrops</servlet-name>
 		<url-pattern>/delcrops</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddClimate</servlet-name>
+		<url-pattern>/addclimate</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DelClimate</servlet-name>
+		<url-pattern>/delclimate</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>
