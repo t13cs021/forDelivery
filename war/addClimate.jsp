@@ -1,4 +1,4 @@
-<%@ page import="java.util.*,com.appspot.projectF.servlet.*"%>
+<%@ page import="java.util.*,com.appspot.projectF.datastore.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 List<Climate> climates = (List<Climate>)request.getAttribute("climate");
