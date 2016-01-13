@@ -1,6 +1,7 @@
 package com.appspot.projectF.servlet;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -8,6 +9,7 @@ import javax.jdo.Query;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.appspot.projectF.datastore.*;
 
 public class DelClimate extends HttpServlet {
 	private static final long serialVersionUID = 1L;

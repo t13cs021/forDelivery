@@ -1,4 +1,5 @@
-package com.appspot.projectF.servlet;
+package com.appspot.projectF.datastore;
+
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManagerFactory;
