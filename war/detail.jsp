@@ -6,8 +6,8 @@ String yasai = (String) request.getAttribute("vegName");
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-<%@ page import="com.appspot.projectF.servlet.Crops" %>
-<%@ page import="com.appspot.projectF.servlet.PMF" %>
+<%@ page import="com.appspot.projectF.datastore.Crops" %>
+<%@ page import="com.appspot.projectF.datastore.PMF" %>
 <%@ page import="javax.jdo.PersistenceManager" %>
 <%@ page import="javax.jdo.Query" %>
 <%@ page import="java.text.MessageFormat" %>
