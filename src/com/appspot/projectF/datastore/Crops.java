@@ -1,4 +1,5 @@
-package com.appspot.projectF.servlet;
+package com.appspot.projectF.datastore;
+
 
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
