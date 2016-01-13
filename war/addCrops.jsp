@@ -1,4 +1,4 @@
-<%@page import="java.util.*,com.appspot.projectF.servlet.*"%>
+<%@page import="java.util.*,com.appspot.projectF.datastore.*"%>
 <%@page language="java" contentType="text/html; charset=utf-8"%>
 <%
 List<Crops> crops = (List<Crops>)request.getAttribute("crops");
