@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 String pref = (String)request.getAttribute("prefName");
-String[] rank1_crops = (String[]) request.getAttribute("rank1_crops");
+List<String> rank1_crops = (List)request.getAttribute("rank1_crops");
 String[] rank2_crops = (String[]) request.getAttribute("rank2_crops");
 %>
 
@@ -17,8 +17,8 @@ String[] rank2_crops = (String[]) request.getAttribute("rank2_crops");
 <!-- 選択した都道府県におすすめの野菜一覧 -->
 <table>
 	<tr><th>星1つ</th></tr>
-	<% if (rank1_crops != null) for (int i = 0; i < rank1_crops.length; i++) { %>
-	<tr><td><a href="<%= request.getContextPath() %>/detail?pref=<%= pref %>&yasai=<%= rank1_crops[i] %>"><%= rank1_crops[i] %></a></td></tr>
+	<% if (rank1_crops != null) for (String crop:rank1_crops) { %>
+	<tr><td><a href="<%= request.getContextPath() %>/detail?pref=<%= pref %>&yasai=<%= crop %>"><%= crop %></a></td></tr>
 	<% } %>
 	<tr><th>星2つ</th></tr>
 	<% if (rank2_crops != null) for (int i = 0; i < rank2_crops.length; i++) { %>
