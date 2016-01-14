@@ -57,13 +57,14 @@ public class AddClimate extends HttpServlet {
 			//パースする
 			st = new StringTokenizer(line[i],",");
 			//カンマ区切りでデータを一つずつ変数に格納&型変換
+			//順番に依存するので注意
 			prefectures = st.nextToken();
 			year = Integer.parseInt(st.nextToken());
 			month = Integer.parseInt(st.nextToken());
 			temperature = Float.parseFloat(st.nextToken());
 			precipitation = Float.parseFloat(st.nextToken());
-			snowfall = Float.parseFloat(st.nextToken());
 			sunhour = Float.parseFloat(st.nextToken());
+			snowfall = Float.parseFloat(st.nextToken());
 			//パースした各値を気候オブジェクトにして，リストに追加
 			climates.add(new Climate(prefectures, year, month, temperature, precipitation, snowfall, sunhour));
         }

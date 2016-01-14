@@ -12,7 +12,7 @@ List<Climate> climates = (List<Climate>)request.getAttribute("climate");
 </head>
 <body>
 	<span style="font-size: 200%">気候情報登録</span>
-	<p>都道府県名,年,月,気温,降水量,降雪量,日照時間</p>
+	<p>都道府県名,年,月,気温,降水量,日照時間,降雪量</p>
 	<p>の形式で入力してください．カンマは半角です．</p>
 	<p>都道府県名は例えば「山梨県」など，後ろに都道府県をつけてください．</p>
 	
@@ -34,8 +34,8 @@ List<Climate> climates = (List<Climate>)request.getAttribute("climate");
 			<th>月</th>
 			<th>気温</th>
 			<th>降水量</th>
-			<th>降雪量</th>
 			<th>日照時間</th>
+			<th>降雪量</th>
 		</tr>
 		<% if (climates != null) for (Climate climate: climates) { %>
 		<tr>
@@ -44,8 +44,8 @@ List<Climate> climates = (List<Climate>)request.getAttribute("climate");
 			<td><%= climate.getMonth() %></td>
 			<td><%= climate.getTemperature() %></td>
 			<td><%= climate.getPrecipitation() %></td>
-			<td><%= climate.getSnowfall() %></td>
 			<td><%= climate.getSunhour() %></td>
+			<td><%= climate.getSnowfall() %></td>
 		</tr>
 		<% } %>
 	</table>
