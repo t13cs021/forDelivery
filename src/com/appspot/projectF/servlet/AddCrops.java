@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class AddCrops extends HttpServlet {
+	//入力が空の時に代わりに入れる数値の定義
+	public static float UDUMMY = 1000;
+	public static float LDUMMY = -1000;
+	
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -60,25 +64,25 @@ public class AddCrops extends HttpServlet {
 				temp_lLimit = Float.parseFloat(field[2]);
 			}
 			catch(NumberFormatException e){
-				temp_lLimit = -1000;
+				temp_lLimit = LDUMMY;
 			}
 			try{
 				temp_uLimit = Float.parseFloat(field[3]);
 			}
 			catch(NumberFormatException e){
-				temp_uLimit = 1000;
+				temp_uLimit = UDUMMY;
 			}
 			try{
 				sunhour_lLimit = Float.parseFloat(field[4]);
 			}
 			catch(NumberFormatException e){
-				sunhour_lLimit = -1000;
+				sunhour_lLimit = LDUMMY;
 			}
 			try{
 				sunhour_uLimit = Float.parseFloat(field[5]);
 			}
 			catch(NumberFormatException e){
-				sunhour_uLimit = 1000;
+				sunhour_uLimit = UDUMMY;
 			}
 			memo = field[6];
 			//パースした各値を農作物オブジェクトにして，リストに追加
