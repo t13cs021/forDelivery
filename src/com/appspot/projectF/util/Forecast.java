@@ -39,7 +39,7 @@ public class Forecast {
 		//最近3年に絞る
 		Iterator<Climate> itr = climates.iterator();
 		while(itr.hasNext()){
-			if( itr.next().getYear() < thisyear-4 ){
+			if( itr.next().getYear() < thisyear-3 ){
 				itr.remove();
 			}
 		}
@@ -59,6 +59,9 @@ public class Forecast {
 				//計算中の月かどうか
 				if(c.getMonth() == i){
 					//計算中の月なら加算
+					System.out.print(c.getPrefectures());
+					System.out.print(c.getYear() + " ");
+					System.out.println(c.getMonth());
 					temperature += c.getTemperature();
 					precipitation += c.getPrecipitation();
 					snowfall += c.getSnowfall();
