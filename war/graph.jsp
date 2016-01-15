@@ -33,16 +33,12 @@ String shurui = request.getParameter("shurui");
 	        Forecast forecast = new Forecast();
 	        // 予測関数で返ってきた配列をいれるやつ
 	        Climate [] prefClim = forecast.getForecast(pref);
-	        // getPrefecturesとか使いたいから宣言したけど初期化は??どうやれば...
-	        Climate cl;
 	        
 	        // デバッグ用
 	        for(int i = 1; i < 13; i++){
 	        	System.out.println(prefClim[i].getTemperature());
 	        }
 
-	    	      // さて配列にどう入れましょう...script難しいよう(‘・ω・')
-	    	  	// すべてのエンティティの表示
 	    	  	for (int i = 1; i < 13; i++) {
 	    	  	
 	 	    	if(shurui != null) { 
