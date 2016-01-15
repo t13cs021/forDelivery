@@ -36,8 +36,17 @@ public class Forecast {
 		int thisyear = calendar.get(Calendar.YEAR);
 		//各数字の平均計算用一時変数
 		float temperature,precipitation,snowfall,sunhour;
+		//絞るためのイテレータ宣言
+		Iterator<Climate> itr;
+		//県名で絞る
+		itr = climates.iterator();
+		while(itr.hasNext()){
+			if( !itr.next().getPrefectures().equals(pref) ){
+				itr.remove();
+			}
+		}
 		//最近3年に絞る
-		Iterator<Climate> itr = climates.iterator();
+		itr = climates.iterator();
 		while(itr.hasNext()){
 			if( itr.next().getYear() < thisyear-3 ){
 				itr.remove();
@@ -59,13 +68,12 @@ public class Forecast {
 				//計算中の月かどうか
 				if(c.getMonth() == i){
 					//計算中の月なら加算
-					System.out.print(c.getPrefectures());
-					System.out.print(c.getYear() + " ");
-					System.out.println(c.getMonth());
 					temperature += c.getTemperature();
 					precipitation += c.getPrecipitation();
 					snowfall += c.getSnowfall();
 					sunhour += c.getSunhour();
+					//処理高速化のため加算した県は削除
+					itr.remove();
 				}
 			}
 			//計算中の月のインスタンスを作り，3回加算されたデータを3で割り(平均を求め)代入

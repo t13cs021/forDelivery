@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.appspot.projectF.datastore.*;
-import com.appspot.projectF.util.Forecast;
 
 public class RecommendServlet extends HttpServlet {
 	@Override
@@ -53,8 +52,6 @@ public class RecommendServlet extends HttpServlet {
 			rank1_crops.add(crop.getName());
 		}
 		
-		Forecast f=new Forecast();
-		f.getForecast("山梨県");
 		
 		/***** jspに渡すデータ *****/
 		//選択された都道府県名
