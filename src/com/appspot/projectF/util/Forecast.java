@@ -16,6 +16,9 @@ public class Forecast {
 		Climate[] forecast = new Climate[13];
 		//取得した気象データ
 		List<Climate> climates;
+		//今年(西暦の数字)を取得
+		Calendar calendar = Calendar.getInstance();
+		int thisyear = calendar.get(Calendar.YEAR);
 		
 		/***** 気象データ取得 *****/
 		PersistenceManager pm = null;
@@ -30,15 +33,12 @@ public class Forecast {
 				pm.close();
 		}
 		
-		/****** 必要データの抽出(県名，直近3年) *****/
-		//今年(西暦の数字)を取得
-		Calendar calendar = Calendar.getInstance();
-		int thisyear = calendar.get(Calendar.YEAR);
+		/****** 気象データから必要なデータだけを抽出(県名，直近3年) *****/
 		//絞るためのイテレータ宣言
-		Iterator<Climate> itr;
-		//県名と年で絞る
-		itr = climates.iterator();
+		Iterator<Climate> itr = climates.iterator();
+		//イテレータで取り出したデータの一時格納用変数
 		Climate cl;
+		//県名と年で絞る
 		while(itr.hasNext()){
 			cl = itr.next();
 			if( !cl.getPrefectures().equals(pref) || cl.getYear() < thisyear-3 ){
@@ -47,34 +47,33 @@ public class Forecast {
 		}
 
 		/***** 予測(平均計算) *****/
-		//各数字の平均計算用一時変数
-		float temperature,precipitation,snowfall,sunhour;
+		//加算用変数群(割られる数)
+		float[] temperatures = new float[13];
+		float[] precipitations = new float[13];
+		float[] snowfalls = new float[13];
+		float[] sunhours = new float[13];
+		//割り算用変数(割る数)
+		int[] sumcount = new int[13];
+		//配列初期化
+		for(int i=0;i<13;i++){
+			temperatures[i] = precipitations[i] = snowfalls[i] = sunhours[i] = sumcount[i] = 0;
+		}
+		//今見ている気象データが何月のデータかを格納しておく変数(代入先の配列の添字になる)
+		int month;
+		//絞った予測データを走査し，割る数割られる数を加算していく
+		for(Climate c:climates){
+			month = c.getMonth();
+			temperatures[month] += c.getTemperature();
+			precipitations[month] += c.getPrecipitation();
+			snowfalls[month] += c.getSnowfall();
+			sunhours[month] += c.getSunhour();
+			sumcount[month]++;
+		}
+		//各月のインスタンスを作って返却する配列に格納
 		for(int i=1;i<=12;i++){
-			//加算する変数初期化
-			temperature=0;
-			precipitation=0;
-			snowfall=0;
-			sunhour=0;
-			//イテレータセット
-			itr=climates.iterator();
-			//3年*12ヶ月のデータを走査
-			while(itr.hasNext()){
-				//イテレータから取り出し
-				Climate c=itr.next();
-				//計算中の月かどうか
-				if(c.getMonth() == i){
-					System.out.println(c.getPrefectures() + " " + c.getYear() + " " + c.getMonth());
-					//計算中の月なら加算
-					temperature += c.getTemperature();
-					precipitation += c.getPrecipitation();
-					snowfall += c.getSnowfall();
-					sunhour += c.getSunhour();
-					//処理高速化のため加算した県は削除
-					itr.remove();
-				}
-			}
-			//計算中の月のインスタンスを作り，3回加算されたデータを3で割り(平均を求め)代入
-			forecast[i] = new Climate(pref,thisyear,i,temperature/3,precipitation/3,snowfall/3,sunhour/3);
+			//加算されたデータを年数で割り(平均を求め)，コンストラクタに渡す
+			forecast[i] = new Climate(pref,thisyear,i,temperatures[i]/sumcount[i],
+					precipitations[i]/sumcount[i],snowfalls[i]/sumcount[i],sunhours[i]/sumcount[i]);
 		}
 		
 		/***** return *****/

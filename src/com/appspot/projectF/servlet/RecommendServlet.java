@@ -26,7 +26,7 @@ public class RecommendServlet extends HttpServlet {
 		//取得した農作物データ
 		List<Crops> crops;
 		//取得した気象予測データ
-		Climate[] climate;
+		Climate[] climates;
 		
 		/***** 農作物データ取得 *****/
 		PersistenceManager pm = null;
@@ -43,8 +43,11 @@ public class RecommendServlet extends HttpServlet {
 		
 		/***** 気象予測データ取得 *****/
 		Forecast forecast = new Forecast();
-		climate=forecast.getForecast(pref);
-		
+		climates=forecast.getForecast(pref);
+		//デバッグ用表示
+		for(int i=1;i<13;i++){
+			System.out.println(climates[i].getPrefectures() + " " + climates[i].getYear() + " " + climates[i].getMonth());
+		}
 		
 		/***** 選出 *****/
 		for(Crops crop:crops){
