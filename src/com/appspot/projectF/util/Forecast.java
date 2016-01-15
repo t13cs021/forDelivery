@@ -30,29 +30,25 @@ public class Forecast {
 				pm.close();
 		}
 		
-		/***** 予測(平均計算) *****/
+		/****** 必要データの抽出(県名，直近3年) *****/
 		//今年(西暦の数字)を取得
 		Calendar calendar = Calendar.getInstance();
 		int thisyear = calendar.get(Calendar.YEAR);
-		//各数字の平均計算用一時変数
-		float temperature,precipitation,snowfall,sunhour;
 		//絞るためのイテレータ宣言
 		Iterator<Climate> itr;
-		//県名で絞る
+		//県名と年で絞る
 		itr = climates.iterator();
+		Climate cl;
 		while(itr.hasNext()){
-			if( !itr.next().getPrefectures().equals(pref) ){
+			cl = itr.next();
+			if( !cl.getPrefectures().equals(pref) || cl.getYear() < thisyear-3 ){
 				itr.remove();
 			}
 		}
-		//最近3年に絞る
-		itr = climates.iterator();
-		while(itr.hasNext()){
-			if( itr.next().getYear() < thisyear-3 ){
-				itr.remove();
-			}
-		}
-		//平均
+
+		/***** 予測(平均計算) *****/
+		//各数字の平均計算用一時変数
+		float temperature,precipitation,snowfall,sunhour;
 		for(int i=1;i<=12;i++){
 			//加算する変数初期化
 			temperature=0;
@@ -67,6 +63,7 @@ public class Forecast {
 				Climate c=itr.next();
 				//計算中の月かどうか
 				if(c.getMonth() == i){
+					System.out.println(c.getPrefectures() + " " + c.getYear() + " " + c.getMonth());
 					//計算中の月なら加算
 					temperature += c.getTemperature();
 					precipitation += c.getPrecipitation();
