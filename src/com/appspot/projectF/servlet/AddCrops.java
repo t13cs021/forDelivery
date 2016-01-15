@@ -58,10 +58,10 @@ public class AddCrops extends HttpServlet {
 			//カンマ区切りでデータを一つずつ変数に格納&型変換
 			name = st.nextToken();
 			month = Integer.parseInt(st.nextToken());
-			temp_uLimit = Float.parseFloat(st.nextToken());
 			temp_lLimit = Float.parseFloat(st.nextToken());
-			sunhour_uLimit = Float.parseFloat(st.nextToken());
+			temp_uLimit = Float.parseFloat(st.nextToken());
 			sunhour_lLimit = Float.parseFloat(st.nextToken());
+			sunhour_uLimit = Float.parseFloat(st.nextToken());
 			memo = st.nextToken();
 			//パースした各値を農作物オブジェクトにして，リストに追加
 			crops.add(new Crops(name, month, temp_uLimit, temp_lLimit, sunhour_uLimit, sunhour_lLimit, memo));
