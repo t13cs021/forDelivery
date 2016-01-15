@@ -25,9 +25,10 @@ public class RecommendServlet extends HttpServlet {
 		String[] rank2_crops = {"foo", "bar"};
 		//取得した農作物データ
 		List<Crops> crops;
+		//取得した気象予測データ
+		Climate[] climate;
 		
-		
-		/***** データ取得 *****/
+		/***** 農作物データ取得 *****/
 		PersistenceManager pm = null;
 		//DB開けなかったら，開けてもデータストアを閉じる
 		try {
@@ -40,12 +41,13 @@ public class RecommendServlet extends HttpServlet {
 				pm.close();
 		}
 		
+		/***** 気象予測データ取得 *****/
+		Forecast forecast = new Forecast();
+		climate=forecast.getForecast(pref);
+		
 		
 		/***** 選出 *****/
 		for(Crops crop:crops){
-			//予測
-			Forecast forecast = new Forecast();
-			Climate[] climate=forecast.getForecast(pref);
 			//作物情報を作物名ごとに分類
 			//すべての農作物について適合するか確認
 			//rank1_crops,rank2_cropsに格納
