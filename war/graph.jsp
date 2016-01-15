@@ -25,7 +25,7 @@ String shurui = request.getParameter("shurui");
 
 	        var data = new google.visualization.DataTable();
 	        data.addColumn('number', 'X');
-	        data.addColumn('number', 'Dogs');
+	        data.addColumn('number', '予測値');
 	        
 	        <%
 	    	 PersistenceManager pm = null;
@@ -33,53 +33,41 @@ String shurui = request.getParameter("shurui");
 	        Forecast forecast = new Forecast();
 	        // 予測関数で返ってきた配列をいれるやつ
 	        Climate [] prefClim = forecast.getForecast(pref);
-	        
-	        // デバッグ用
-	        for(int i = 1; i < 13; i++){
-	        	System.out.println(prefClim[i].getTemperature());
-	        }
 
-	    	  	for (int i = 1; i < 13; i++) {
-	    	  	
-	 	    	if(shurui != null) { 
-	 	    	if(shurui.equals("気温")){
+	        for (int i = 1; i < 13; i++) {
+	        	if(shurui != null) { 
+	        		if(shurui.equals("気温")){
 	    	   %>  	  
 	    	   data.addRows([
 	    	                 [ <%= i %>,<%= prefClim[i].getTemperature() %>],
 	    		]);
 	 	    	
 	    	  <%
-	 	    	}
-	 	    	if(shurui.equals("日照時間")){
+	    	  }
+	        		if(shurui.equals("日照時間")){
 	 	    	   %>  	  
 	 	    	   data.addRows([
 	 	    	                 [ <%= i %>,<%= prefClim[i].getSunhour() %>],
-	 	    		]);
-	 	 	    	
+	 	    	                 ]);
 	 	    	  <%
-	 	 	    	}
-	 	    	if(shurui.equals("降水量")){
-		 	    	   %>  	  
+	 	    	  }
+	        		if(shurui.equals("降水量")){
+		 	    	   %>
 		 	    	   data.addRows([
 		 	    	                 [ <%= i %>,<%= prefClim[i].getPrecipitation() %>],
-		 	    		]);
-		 	 	    	
+		 	    	                 ]);
 		 	    	  <%
 		 	 	    	}
-	 	    	if(shurui.equals("降雪量")){
+	        		if(shurui.equals("降雪量")){
 		 	    	   %>  	  
 		 	    	   data.addRows([
 		 	    	                 [ <%= i %>,<%= prefClim[i].getSnowfall() %>],
-		 	    		]);
-		 	 	    	
+		 	    	                 ]);
 		 	    	  <%
-		 	 	    	}
-	 	    	}
-	    	  	}
-
+		 	    	  }
+	        		}
+	        	}
 	    	  %>
-	    	  
-
 	        var options = {
 	          hAxis: {
 	            title: '月'
@@ -90,12 +78,15 @@ String shurui = request.getParameter("shurui");
 	        };
 
 	        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-
 	        chart.draw(data, options);
 	      }
 	  </script>
 </head>
 <body>
+<h1>気象予測</h1>
+<p>過去3年分のデータを基に算出した今年の気象予測データです</p>
+<p>表示したい項目のボタンをクリックしてください</p>
+
  <form action="/graph" method="get">
  <INPUT TYPE="HIDDEN" NAME="pref" VALUE=<%= pref %>>
  	<input type="submit" name = "shurui" value="気温" />
@@ -103,9 +94,7 @@ String shurui = request.getParameter("shurui");
  	<input type="submit" name = "shurui" value="降水量" />
  	<input type="submit" name = "shurui" value="降雪量" />
  </form>
-<h1>ぐらふ</h1>
-がんばってぐらふひょうじする
-  <div id="chart_div"></div>
+<div id="chart_div"></div>
 <div style="position:absolute;top:500;left:150px;">
 <FORM>
 <INPUT type="button" value="戻る" onClick="history.back()">
