@@ -1,7 +1,5 @@
 <%@ page import="com.appspot.projectF.datastore.Climate" %>
 <%@ page import="com.appspot.projectF.util.*" %>
-<%@ page import="java.text.MessageFormat" %>
-<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
 String pref = (String)request.getAttribute("prefName");
@@ -25,27 +23,26 @@ Climate [] prefClim = (Climate[])request.getAttribute("climate");
 		data.addColumn('number', '予測値');
 		<%
 		for (int i = 1; i < 13; i++) {
-			if(shurui != null) {
-				if(shurui.equals("気温")){
-				%>
-					data.addRows([[ <%= i %>,<%= prefClim[i].getTemperature() %>],]);
-				<%
-				}
-				else if(shurui.equals("日照時間")){
-				%>
-					data.addRows([[ <%= i %>,<%= prefClim[i].getSunhour() %>],]);
-				<%
-				}
-				else if(shurui.equals("降水量")){
-				%>
-					data.addRows([[ <%= i %>,<%= prefClim[i].getPrecipitation() %>],]);
-				<%
-				}
-				else if(shurui.equals("降雪量")){
-				%>
-					data.addRows([[ <%= i %>,<%= prefClim[i].getSnowfall() %>],]);
-				<%
-				}
+			if(shurui == null);
+			else if(shurui.equals("気温")){
+			%>
+				data.addRows([[ <%= i %>,<%= prefClim[i].getTemperature() %>],]);
+			<%
+			}
+			else if(shurui.equals("日照時間")){
+			%>
+				data.addRows([[ <%= i %>,<%= prefClim[i].getSunhour() %>],]);
+			<%
+			}
+			else if(shurui.equals("降水量")){
+			%>
+				data.addRows([[ <%= i %>,<%= prefClim[i].getPrecipitation() %>],]);
+			<%
+			}
+			else if(shurui.equals("降雪量")){
+			%>
+				data.addRows([[ <%= i %>,<%= prefClim[i].getSnowfall() %>],]);
+			<%
 			}
 		}
 		%>
