@@ -66,8 +66,9 @@ Climate [] prefClim = (Climate[])request.getAttribute("climate");
 	</form>
 	<div id="chart_div"></div>
 	<div style="position:absolute;top:500;left:150px;">
-		<form>
-			<input type="button" value="戻る" onClick="history.back()">
+		<form action="/recommend" method="get">
+			<input type="hidden" name="pref" value="<%= pref %>">
+			<input type="submit" value="戻る">
 		</form>
 	</div>
 </body>
