@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class AddCrops extends HttpServlet {
+	//入力が空の時に代わりに入れる数値の定義
+	public static float UDUMMY = 1000;
+	public static float LDUMMY = -1000;
+	
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -45,24 +49,42 @@ public class AddCrops extends HttpServlet {
 		float temp_uLimit,temp_lLimit,sunhour_uLimit,sunhour_lLimit;
 		//あとで一括でデータストアに投げるための農作物のリスト
 		ArrayList<Crops> crops = new ArrayList<Crops>();
-		//パースに必要
-		StringTokenizer st;
 		//入力されたCSVを受け取る
 		String content = req.getParameter("content");
 		//行に分割して配列で保持
 		String[] line = content.split("\n");
 		//各行に対して処理
 		for(int i=0;i<line.length;i++){
-			//パースする
-			st = new StringTokenizer(line[i],",");
-			//カンマ区切りでデータを一つずつ変数に格納&型変換
-			name = st.nextToken();
-			month = Integer.parseInt(st.nextToken());
-			temp_lLimit = Float.parseFloat(st.nextToken());
-			temp_uLimit = Float.parseFloat(st.nextToken());
-			sunhour_lLimit = Float.parseFloat(st.nextToken());
-			sunhour_uLimit = Float.parseFloat(st.nextToken());
-			memo = st.nextToken();
+			//1行をカンマで区切ってそれぞれを文字列型配列に格納
+			String[] field = line[i].split(",");
+			//カンマ区切りでデータを一つずつ一時変数に格納&必要なら型変換
+			name = field[0];
+			month = Integer.parseInt(field[1]);
+			try{
+				temp_lLimit = Float.parseFloat(field[2]);
+			}
+			catch(NumberFormatException e){
+				temp_lLimit = LDUMMY;
+			}
+			try{
+				temp_uLimit = Float.parseFloat(field[3]);
+			}
+			catch(NumberFormatException e){
+				temp_uLimit = UDUMMY;
+			}
+			try{
+				sunhour_lLimit = Float.parseFloat(field[4]);
+			}
+			catch(NumberFormatException e){
+				sunhour_lLimit = LDUMMY;
+			}
+			try{
+				sunhour_uLimit = Float.parseFloat(field[5]);
+			}
+			catch(NumberFormatException e){
+				sunhour_uLimit = UDUMMY;
+			}
+			memo = field[6];
 			//パースした各値を農作物オブジェクトにして，リストに追加
 			crops.add(new Crops(name, month, temp_uLimit, temp_lLimit, sunhour_uLimit, sunhour_lLimit, memo));
         }
