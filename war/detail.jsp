@@ -12,6 +12,8 @@ pageEncoding="UTF-8"%>
 <%@ page import="javax.jdo.Query" %>
 <%@ page import="java.text.MessageFormat" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.appspot.projectF.servlet.AddCrops"  %>
+<%@ page import="com.appspot.projectF.util.Sort"  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -55,8 +57,8 @@ PersistenceManager pm = null;
 
            List<Crops> crops = (List<Crops>) query.execute();
            request.setAttribute("crops", crops);
-           int i=1;
-              for(Crops sr:crops){ if(yasai.equals(sr.getName())){%><br> <br>　　<%=sr.getMonth()%>月の下限<%=sr.getTemp_lLimit()%>℃<br>　　　　　上限<%=sr.getTemp_uLimit()%>℃<%}} 
+           Sort.sortCropsForMonth(crops);
+              for(Crops sr:crops){if(sr.getTemp_lLimit()!=AddCrops.LDUMMY&&sr.getTemp_lLimit()!=AddCrops.UDUMMY){ if(yasai.equals(sr.getName())){%><br> <br>　<%if(sr.getTemp_lLimit()!=AddCrops.LDUMMY){%>　<%=sr.getMonth()%>月の下限<%=sr.getTemp_lLimit()%>℃<%} %><br><%if(sr.getTemp_lLimit()!=AddCrops.LDUMMY){%>　　　　　上限<%=sr.getTemp_uLimit()%>℃<%} }%><%}} 
         
               } finally {
            if (pm != null && !pm.isClosed())
@@ -75,8 +77,8 @@ PersistenceManager pm2 = null;
 
            List<Crops> crops = (List<Crops>) query.execute();
            request.setAttribute("crops", crops);
-           int i=1;
-              for(Crops sr:crops){ if(yasai.equals(sr.getName())){%><br> <br>　　<%=sr.getMonth()%>月の下限<%=sr.getSunhour_lLimit()%>時間<br>　　　　　上限<%=sr.getSunhour_uLimit()%>時間<%}} 
+           Sort.sortCropsForMonth(crops);
+              for(Crops sr:crops){if(sr.getSunhour_uLimit()!=AddCrops.LDUMMY&&sr.getSunhour_lLimit()!=AddCrops.UDUMMY){ if(yasai.equals(sr.getName())){%><br> <br>　<%if(sr.getSunhour_lLimit()!=AddCrops.LDUMMY){%>　<%=sr.getMonth()%>月の下限<%=sr.getSunhour_lLimit()%>時間<%} %><br><%if(sr.getSunhour_uLimit()!=AddCrops.LDUMMY){ %>　　　　　上限<%=sr.getSunhour_uLimit()%>時間<%}} %><%}} 
         
               } finally {
            if (pm2 != null && !pm2.isClosed())
@@ -105,9 +107,10 @@ PersistenceManager pm3 = null;
 <br>
 </div>
 <div style="position:absolute;top:500;left:150px;">
-<FORM>
-<INPUT type="button" value="戻る" onClick="history.back()">
-</FORM>
-</div>
+		<form action="/recommend" method="get">
+			<input type="hidden" name="pref" value="<%= pref %>">
+			<input type="submit" value="戻る">
+		</form>
+	</div>
 </body>
 </html>
