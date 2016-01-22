@@ -12,7 +12,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>index</title>
+<title><%= yasai %>の詳細情報</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!--Load the AJAX API-->
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -63,14 +63,14 @@ body {
 				上限<%=sr.getTemp_uLimit()%>℃
 				<%
 				break;
-			case 10:
+			case 1:
 				%>
 				<br>
 				<br>
 				<%=sr.getMonth()%>月の上限<%=sr.getTemp_uLimit()%>℃
 				<%
 				break;
-			case 1:
+			case 10:
 				%>
 				<br>
 				<br>
@@ -98,14 +98,14 @@ body {
 				上限<%=sr.getSunhour_uLimit()%>時間
 				<%
 				break;
-			case 10:
+			case 1:
 				%>
 				<br>
 				<br>
 				<%=sr.getMonth()%>月の上限<%=sr.getSunhour_uLimit()%>時間
 				<%
 				break;
-			case 1:
+			case 10:
 				%>
 				<br>
 				<br>
