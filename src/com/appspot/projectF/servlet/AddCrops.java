@@ -56,7 +56,7 @@ public class AddCrops extends HttpServlet {
 		//各行に対して処理
 		for(int i=0;i<line.length;i++){
 			//1行をカンマで区切ってそれぞれを文字列型配列に格納
-			String[] field = line[i].split(",");
+			String[] field = line[i].split(",", -1);
 			//カンマ区切りでデータを一つずつ一時変数に格納&必要なら型変換
 			name = field[0];
 			month = Integer.parseInt(field[1]);
