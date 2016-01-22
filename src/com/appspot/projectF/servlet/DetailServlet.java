@@ -17,7 +17,6 @@ public class DetailServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// いっかいきえたかなしみにまけててきとう
 		String str = req.getParameter("pref");
 		String veg = req.getParameter("yasai");
 		
