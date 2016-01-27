@@ -4,6 +4,7 @@
 <%@ page import="com.appspot.projectF.datastore.Crops"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.appspot.projectF.servlet.AddCrops"%>
+<%@ page import="com.appspot.projectF.util.CropMap"%>
 <%
 	String pref = (String) request.getAttribute("prefName");
 	String yasai = (String) request.getAttribute("vegName");
@@ -39,7 +40,7 @@ body {
 		</FONT>
 	</div>
 	<div style="position: absolute; top: 250; left: 50px; text-align:center;">
-		<img src="<%=yasai%>.png" width="250" height="250"><br><br><br>
+		<img src="<%=CropMap.getRorm(yasai)%>.png" width="250" height="250"><br><br><br>
 		<form action="/recommend" method="get">
 			<input type="hidden" name="pref" value="<%=pref%>">
 			<input type="submit" value="戻る" >
