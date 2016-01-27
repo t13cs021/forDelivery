@@ -1,4 +1,5 @@
 <%@ page import="java.util.*,com.appspot.projectF.datastore.*"%>
+<%@ page import="com.appspot.projectF.util.CropMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 String pref = (String)request.getAttribute("prefName");
@@ -18,11 +19,17 @@ List<String> rank2_crops = (List<String>)request.getAttribute("rank2_crops");
 <table>
 	<tr><th>星1つ</th></tr>
 	<% if (rank1_crops != null) for (String crop:rank1_crops) { %>
-	<tr><td><a href="<%= request.getContextPath() %>/detail?pref=<%= pref %>&yasai=<%= crop %>"><%= crop %></a></td></tr>
+	<tr><td>
+		<a href="<%= request.getContextPath() %>/detail?pref=<%= pref %>&yasai=<%= crop %>"><img src="<%=CropMap.getRorm(crop)%>.png" width="250" height="250"><%= crop %></a>
+	</td></tr>
 	<% } %>
+</table>
+<table>
 	<tr><th>星2つ</th></tr>
 	<% if (rank2_crops != null) for (String crop:rank2_crops) { %>
-	<tr><td><a href="<%= request.getContextPath() %>/detail?pref=<%= pref %>&yasai=<%= crop %>"><%= crop %></a></td></tr>
+	<tr><td>
+		<a href="<%= request.getContextPath() %>/detail?pref=<%= pref %>&yasai=<%= crop %>"><img src="<%=CropMap.getRorm(crop)%>.png" width="250" height="250"><%= crop %></a>
+	</td></tr>
 	<% } %>
 </table>
 <!-- 選択した都道府県の気候のグラフを表示 -->
